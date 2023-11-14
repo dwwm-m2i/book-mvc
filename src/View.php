@@ -26,6 +26,11 @@ class View
 
         return View::render('404');
     }
+
+    public static function redirect($route)
+    {
+        header("Location: $route");
+    }
 }
 
 // Sans static

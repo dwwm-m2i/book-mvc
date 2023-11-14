@@ -47,7 +47,7 @@ class Model
         $values = [];
 
         foreach ($fields as $field) {
-            $values[':'.$field] = $this->$field;
+            $values[':'.$field] = htmlspecialchars($this->$field);
         }
 
         // [':name' => 'Fiorella', ':age' => 3]
