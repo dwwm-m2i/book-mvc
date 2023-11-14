@@ -15,4 +15,17 @@ class BookController
             'books' => $books,
         ]);
     }
+
+    public function show($id)
+    {
+        $book = Book::fake($id);
+
+        if (! $book) {
+            return View::notFound();
+        }
+
+        return View::render('books/show', [
+            'book' => $book,
+        ]);
+    }
 }

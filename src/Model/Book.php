@@ -13,7 +13,7 @@ class Book extends Model
     public $published_at;
     public $image;
 
-    public static function fake()
+    public static function fake($id = null)
     {
         $books = [
             [
@@ -135,6 +135,17 @@ class Book extends Model
             $newBooks[] = $newBook;
         }
 
+        // Si on a passé un id à la fonction fake, on ne renvoie que ce livre
+        foreach ($newBooks as $newBook) {
+            if ($newBook->id == $id) {
+                return $newBook;
+            }
+        }
+
+        if ($id) {
+            return null; // Sert pour la 404 si on a pas trouvé de livres
+        }
+
         return $newBooks;
     }
 
@@ -162,7 +173,15 @@ class Book extends Model
      */
     public function year()
     {
-        return date('Y', strtotime($this->published_at));
+        return $this->date('Y');
+    }
+
+    /**
+     * Permet de formater une date US en ce qu'on veut.
+     */
+    public function date($format = 'd/m/Y')
+    {
+        return date($format, strtotime($this->published_at));
     }
 
     /**
