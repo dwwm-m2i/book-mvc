@@ -23,8 +23,7 @@ class App extends AltoRouter
             $object = new $controller();
             $object->$method(...$match['params']);
         } else {
-            http_response_code(404);
-            View::render('404');
+            return View::notFound();
         }
     }
 }

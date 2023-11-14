@@ -19,6 +19,13 @@ class View
 
         require '../views/'.$view.'.html.php';
     }
+
+    public static function notFound()
+    {
+        http_response_code(404);
+
+        return View::render('404');
+    }
 }
 
 // Sans static

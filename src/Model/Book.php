@@ -118,8 +118,10 @@ class Book extends Model
             ],
         ];
 
+        $newBooks = [];
+
         // Transforme le tableau de tableaux en tableau d'objets
-        foreach ($books as &$book) {
+        foreach ($books as $book) {
             $newBook = new Book();
             $newBook->id = $book['id'];
             $newBook->title = $book['title'];
@@ -130,10 +132,10 @@ class Book extends Model
             $newBook->published_at = $book['published_at'];
             $newBook->image = $book['image'];
 
-            $book = $newBook;
+            $newBooks[] = $newBook;
         }
 
-        return $books;
+        return $newBooks;
     }
 
     /**
