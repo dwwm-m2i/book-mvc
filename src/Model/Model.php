@@ -19,6 +19,9 @@ class Model
         $table = static::getTable(); // static:: est $this en static
         $sql = 'SELECT * FROM '.$table;
         $query = Database::get()->query($sql);
+        // Permet de récupérer un tableau d'objets au lieu d'un
+        // tableau de tableaux
+        $query->setFetchMode(\PDO::FETCH_CLASS, static::class);
 
         return $query->fetchAll();
     }
@@ -29,6 +32,9 @@ class Model
         $sql = "SELECT * FROM $table WHERE id = :id";
         $query = Database::get()->prepare($sql);
         $query->execute(['id' => $id]);
+        // Permet de récupérer un tableau d'objets au lieu d'un
+        // tableau de tableaux
+        $query->setFetchMode(\PDO::FETCH_CLASS, static::class);
 
         return $query->fetch();
     }
