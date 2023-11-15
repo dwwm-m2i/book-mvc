@@ -48,6 +48,7 @@ class BookController
                 $errors['title'] = 'Le titre est invalide.';
             }
 
+            // if ($book->price < 1 || $book->price > 100) {
             if (!($book->price > 1 && $book->price < 100)) {
                 $errors['price'] = 'Le prix doit être entre 1 et 100.';
             }
@@ -64,7 +65,7 @@ class BookController
                 $errors['author'] = 'L\'auteur est invalide.';
             }
 
-            $publishedAt = explode('-', $book->published_at);
+            $publishedAt = explode('-', $book->published_at); // 2023-11-15
             if (!checkdate((int) ($publishedAt[1] ?? 0), (int) ($publishedAt[2] ?? 0), (int) ($publishedAt[0] ?? 0))) {
                 $errors['published_at'] = 'La date est invalide.';
             }
@@ -96,6 +97,7 @@ class BookController
                     mkdir($folder);
                 }
 
+                // Permet de générer un nom aléatoire pour le fichier
                 // Fiorella-1234 devient 91ca106ff0e1537a4c266ca1626c71ba
                 $name = md5($book->title.'-'.uniqid());
                 $extension = substr(strrchr($book->image['name'], '.'), 1); // jpg

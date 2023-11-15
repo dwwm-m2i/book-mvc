@@ -10,7 +10,7 @@ $app = new App();
 
 // Toutes les routes du site
 $app->addRoutes([
-    ['GET', '/', 'HomeController@index'],
+    ['GET', '/', 'BookController@index'],
 
     ['GET', '/livres', 'BookController@index'],
     ['GET', '/livre/[i:id]', 'BookController@show'],
