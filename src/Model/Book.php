@@ -198,7 +198,7 @@ class Book extends Model
         $result .= '-'.substr($this->isbn, 1, $offset - 1); // 8-248827
         $result .= '-'.substr($this->isbn, $offset, $offset - 1); // 8-248827-583739
 
-        if ($size === 10) {
+        if ($size == 10) {
             $result .= '-'.substr($this->isbn, -1); // 8-2488-2758-3
         }
 
