@@ -49,6 +49,7 @@ class Model
         $values = [];
 
         foreach ($fields as $field) {
+            // J'ai ajouté htmlspecialchars pour les failles XSS mais vous savez
             $values[':'.$field] = htmlspecialchars($this->$field);
         }
 
