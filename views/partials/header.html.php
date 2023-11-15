@@ -18,7 +18,12 @@
                     <a class="px-4" href="/">Accueil</a>
                     <a class="px-4" href="/livres">Livres</a>
                     <a class="px-4" href="/cart">Panier (0)</a>
-                    <a class="px-4" href="/login">Connexion</a>
+                    <?php use M2i\Mvc\Auth;
+                    if (Auth::user()) { ?>
+                        <a class="px-4" href="/logout"><?= Auth::user()->email; ?></a>
+                    <?php } else { ?>
+                        <a class="px-4" href="/login">Connexion</a>
+                    <?php } ?>
                     <a class="px-4" href="/a-propos">A propos</a>
                 </li>
             </ul>

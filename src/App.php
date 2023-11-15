@@ -8,6 +8,9 @@ class App extends AltoRouter
 {
     public function run()
     {
+        // On peut démarrer les sessions en même temps que l'app
+        session_start();
+
         // Permet de styliser les erreurs
         $whoops = new \Whoops\Run;
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
