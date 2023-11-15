@@ -14,6 +14,8 @@ $app->addRoutes([
     ['GET', '/livres', 'BookController@index'],
     ['GET', '/livre/[i:id]', 'BookController@show'],
     ['GET|POST', '/livre/nouveau', 'BookController@create'],
+    ['GET|POST', '/livre/[i:id]/modifier', 'BookController@edit'],
+    ['GET', '/livre/[i:id]/supprimer', 'BookController@delete'],
 ]);
 
 // Lancer l'application
