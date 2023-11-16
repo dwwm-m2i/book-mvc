@@ -20,7 +20,7 @@
                     <a class="px-4" href="/cart">Panier (0)</a>
                     <?php use M2i\Mvc\Auth;
                     if (Auth::user()) { ?>
-                        <a class="px-4" href="/logout"><?= Auth::user()->email; ?></a>
+                        <a class="px-4" href="/logout"><?= Auth::user()->name; ?></a>
                     <?php } else { ?>
                         <a class="px-4" href="/login">Connexion</a>
                     <?php } ?>

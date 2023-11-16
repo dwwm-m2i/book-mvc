@@ -42,13 +42,13 @@ class AuthController
     {
         $user = new User();
         $errors = [];
-        $success = false;
 
         if (! empty($_POST)) {
             $clearPassword = $_POST['password'] ?? '';
             $confirmPassword = $_POST['confirm_password'];
             $user->email = $_POST['email'] ?? null;
             $user->name = $_POST['name'] ?? null;
+            // Ne jamais utiliser de md5
             $user->password = password_hash($clearPassword, PASSWORD_DEFAULT);
 
             if (! filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
@@ -59,12 +59,12 @@ class AuthController
                 $errors['password'] = 'Le mot de passe est invalide.';
             }
 
-            if (User::findEmail($user->email)) {
+            if (!empty($user->email) && User::findEmail($user->email)) {
                 $errors['email'] = 'L\'email est déjà utilisé.';
             }
 
             if (empty($errors)) {
-                $success = $user->save(['name', 'email', 'password']);
+                $user->save(['name', 'email', 'password']);
 
                 $_SESSION['user'] = $user;
 
@@ -75,7 +75,6 @@ class AuthController
         return View::render('auth/register', [
             'user' => $user,
             'errors' => $errors,
-            'success' => $success,
         ]);
     }
 
