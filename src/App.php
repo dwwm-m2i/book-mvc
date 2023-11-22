@@ -3,6 +3,7 @@
 namespace M2i\Mvc;
 
 use AltoRouter;
+use M2i\Mvc\Model\User;
 
 class App extends AltoRouter
 {
@@ -10,6 +11,12 @@ class App extends AltoRouter
     {
         // On peut démarrer les sessions en même temps que l'app
         session_start();
+
+        if (! isset($_SESSION['user']) && isset($_COOKIE['REMEMBER'])) {
+            if ($user = User::findToken($_COOKIE['REMEMBER'])) {
+                $_SESSION['user'] = $user;
+            }
+        }
 
         // Permet de styliser les erreurs
         $whoops = new \Whoops\Run;

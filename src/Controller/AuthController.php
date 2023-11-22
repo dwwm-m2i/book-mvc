@@ -25,6 +25,10 @@ class AuthController
                 $_SESSION['user'] = $user;
 
                 if ((bool) $remember) {
+                    // On génére un token
+                    $user->token = bin2hex(random_bytes(64));
+                    $user->update(['token']);
+
                     setcookie('REMEMBER', $user->token, time() + 60 * 60 * 24 * 365);
                 }
 
@@ -50,6 +54,8 @@ class AuthController
             $user->name = $_POST['name'] ?? null;
             // Ne jamais utiliser de md5
             $user->password = password_hash($clearPassword, PASSWORD_DEFAULT);
+            // On génére un token
+            $user->token = bin2hex(random_bytes(64));
 
             if (! filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'L\'email est invalide.';
@@ -64,7 +70,7 @@ class AuthController
             }
 
             if (empty($errors)) {
-                $user->save(['name', 'email', 'password']);
+                $user->save(['name', 'email', 'password', 'token']);
 
                 $_SESSION['user'] = $user;
 
